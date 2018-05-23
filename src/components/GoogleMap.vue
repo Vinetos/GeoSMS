@@ -4,6 +4,13 @@
   </GmapMap>
 </template>
 
+<style scoped>
+  .google-map {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
 <script>
 import store from '../store/AppStore'
 import {mapGetters} from 'vuex'
@@ -17,21 +24,34 @@ export default {
     google: gmapApi
   },
   mounted () {
+    // Disable default UI
     this.$refs.map.$mapPromise.then((map) => {
       const mapOptions = {
         disableDefaultUI: true
       }
       map.setOptions(mapOptions)
     })
-    this.$refs.map.$on('zoom_changed', () => {
-      this.updateTrafficOnMap()
-    })
+    // Auto display traffic information
+    this.$refs.map.$on('zoom_changed', () => { this.updateTrafficOnMap() })
+    // Auto-set dark mode the night
+    const hours = (new Date()).getHours()
+    if (hours >= 21 || hours <= 8) { this.setDarkMode() }
   },
   methods: {
+    setDarkMode: function () {
+      // Update style
+      this.$refs.map.$mapPromise.then((map) => {
+        const mapOptions = {
+          styles: darkMode
+        }
+        map.setOptions(mapOptions)
+        // Change the map type to better view
+        map.setMapTypeId('roadmap')
+      })
+    },
     updateTrafficOnMap: function (force = false) {
       this.$refs.map.$mapPromise.then((map) => {
-        const shouldBeEnabled = map.getZoom() >= 7
-
+        const shouldBeEnabled = map.getZoom() >= 10
         if (this.trafficLayer) {
           this.trafficLayer.setMap(null)
           this.trafficLayer = null
@@ -207,10 +227,3 @@ const darkMode = [{
   ]
 }]
 </script>
-
-<style scoped>
-  .google-map {
-    height: 100%;
-    width: 100%;
-  }
-</style>
