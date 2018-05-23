@@ -17,6 +17,12 @@ When you are calling rescue team, **you might don't know where you are** :
 
 This web-application will **help emergency organisations** to add this new tool and **help them to locating patients** in need.
 
+## How it work  
+The operator **enter the phone number** of the patient and click on the **send button**.  
+Then, the patient will **receive an SMS** with a **one-time link**.  
+The patient must **activate an internet connection**, click on the link and **allow the website** to use the **localization** (GPS).  
+The operator will get **a marker** with **the patient location** and its **GPS coordinates** on the map.  
+
 ## Build Setup
 
 ``` bash
