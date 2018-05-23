@@ -3,21 +3,18 @@
     <div id="google-map">
       <google-map />
     </div>
-    <div id="card-list">
-      <Card />
-      <Card />
-    </div>
+    <CardList id="card-list" />
   </div>
 </template>
 
 <script>
 import GoogleMap from './components/GoogleMap'
-import Card from './components/Card'
+import CardList from './components/CardList'
 
 export default {
   name: 'App',
   components: {
-    Card,
+    CardList,
     GoogleMap
   }
 }

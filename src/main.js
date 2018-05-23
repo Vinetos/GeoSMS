@@ -7,15 +7,13 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
 
+Vue.use(Vuex)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDaUzCfHBBxHd-AweAhrC-tsV5_stILiZQ',
     libraries: 'places'
   }
 })
-
-Vue.use(Vuex)
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

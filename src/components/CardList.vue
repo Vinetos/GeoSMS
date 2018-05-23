@@ -1,0 +1,24 @@
+<template>
+  <div id="card-list">
+    <Card title="hello"/>
+    <Card />
+  </div>
+</template>
+
+<script>
+import Card from './Card'
+
+export default {
+  name: 'CardList',
+  components: {
+    Card
+  }
+}
+</script>
+
+<style scoped>
+  /* Space between cards */
+  #card + #card {
+    margin-top: 5px;
+  }
+</style>
