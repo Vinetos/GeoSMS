@@ -1,14 +1,14 @@
 <template>
-  <div id="card">
+  <div v-if="title && description" id="card">
     <h1 id="title">{{title}}</h1>
-    <span id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam aliquet tortor non nulla dapibus iaculis. Nunc metus justo, dapibus vel gravida faucibus, volutpat sit amet tortor.</span>
+    <span id="description">{{description}}</span>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Card',
-  props: ['title']
+  props: ['title', 'description']
 }
 </script>
 
@@ -29,6 +29,6 @@ export default {
   text-transform: uppercase;
 }
 #description {
-  font-size: 12px;
+  font-size: 15px;
 }
 </style>

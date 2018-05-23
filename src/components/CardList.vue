@@ -1,6 +1,6 @@
 <template>
   <div id="card-list">
-    <Card title="hello"/>
+    <Card title="Welcome" description="Welcome to GeoSMS."/>
     <Card />
   </div>
 </template>
