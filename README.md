@@ -4,16 +4,16 @@
 
 The **emergency services** receive more than [2,5 thousand calls per day in France](https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence).  
 We **have** to know **3 pieces of information** :
-- Who am I ?
-- Why I'm calling ?
-- **Where am I ?**  
+> - Who am I ?
+> - Why I'm calling ?
+> - **Where am I ?**  
 
 And this is on **its last point** we are working to **improve answers**.
 When you are calling rescue team, **you might don't know where you are** :
-- You are in the forest
-- **You are confused**
-- You don't know where exactly you are
-- And **so many cases**...  
+> - You are in the forest
+> - **You are confused**
+> - You don't know where exactly you are
+> - And **so many cases**...  
 
 This web-application will **help emergency organisations** to add this new tool and **help them to locating patients** in need.
 
