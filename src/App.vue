@@ -29,7 +29,7 @@ export default {
 }
 #card-list {
   float: left;
-  margin-top: 3em;
+  margin-top: 1em;
   margin-left: 10px;
   position: absolute;
   width: 300px;
