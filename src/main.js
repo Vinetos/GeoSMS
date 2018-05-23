@@ -12,7 +12,8 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDaUzCfHBBxHd-AweAhrC-tsV5_stILiZQ',
     libraries: 'places'
-  }
+  },
+  autobindAllEvents: false
 })
 /* eslint-disable no-new */
 new Vue({

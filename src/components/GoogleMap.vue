@@ -1,5 +1,6 @@
 <template>
-  <GmapMap class="google-map" ref="map" :center="{lat:46.52863469527167, lng:2.43896484375}" :zoom="6" map-type-id="hybrid">
+  <GmapMap class="google-map" ref="map" :center="{lat:46.52863469527167, lng:2.43896484375}" :zoom="6"
+           map-type-id="hybrid">
   </GmapMap>
 </template>
 
@@ -17,12 +18,33 @@ export default {
   },
   mounted () {
     this.$refs.map.$mapPromise.then((map) => {
-      var mapOptions = {
+      const mapOptions = {
         disableDefaultUI: true
       }
       map.setOptions(mapOptions)
     })
+    this.$refs.map.$on('zoom_changed', () => {
+      this.updateTrafficOnMap()
+    })
+  },
+  methods: {
+    updateTrafficOnMap: function (force = false) {
+      this.$refs.map.$mapPromise.then((map) => {
+        const shouldBeEnabled = map.getZoom() >= 7
+
+        if (this.trafficLayer) {
+          this.trafficLayer.setMap(null)
+          this.trafficLayer = null
+        }
+
+        if (shouldBeEnabled || force) {
+          this.trafficLayer = new this.google.maps.TrafficLayer()
+          this.trafficLayer.setMap(map)
+        }
+      })
+    }
   }
+
 }
 
 const darkMode = [{
