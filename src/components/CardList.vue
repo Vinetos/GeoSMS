@@ -3,6 +3,7 @@
     <Card title="Welcome" description="Welcome to GeoSMS."/>
     <Card title="SMS" description="Send an SMS">
       <vue-tel-input v-model="phone" @onInput="onInput" />
+      <!-- <button type="button">Click Me!</button> -->
       </Card>
   </div>
 </template>
@@ -41,5 +42,8 @@ export default {
   /* Space between cards */
   #card + #card {
     margin-top: 5px;
+  }
+  #vue-tel-input {
+    float: left;
   }
 </style>

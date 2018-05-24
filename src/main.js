@@ -2,14 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'es6-promise/auto'
 import Vue from 'vue'
-import Vuex from 'vuex'
+import router from './router'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vue-tel-input/dist/vue-tel-input.css'
 import VueTelInput from 'vue-tel-input'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuex)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDaUzCfHBBxHd-AweAhrC-tsV5_stILiZQ',
@@ -21,5 +20,6 @@ Vue.use(VueTelInput)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  router,
   render: h => h(require('./App').default)
 })
