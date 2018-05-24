@@ -2,7 +2,6 @@
   <div id="card-list">
     <Card title="Welcome" description="Welcome to GeoSMS."/>
     <Card title="SMS" description="Send an SMS">
-      <Invitation to="John Doe" stage="baby" bg="ccbadc"></Invitation>
       <vue-tel-input v-model="phone" @onInput="onInput" />
       <!-- <button type="button">Click Me!</button> -->
       </Card>
