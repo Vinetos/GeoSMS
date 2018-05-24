@@ -2,6 +2,7 @@
   <div id="card-list">
     <Card title="Welcome" description="Welcome to GeoSMS."/>
     <Card title="SMS" description="Send an SMS">
+      <Invitation to="John Doe" stage="baby" bg="ccbadc"></Invitation>
       <vue-tel-input v-model="phone" @onInput="onInput" />
       <!-- <button type="button">Click Me!</button> -->
       </Card>
@@ -10,11 +11,13 @@
 
 <script>
 import Card from './Card'
+import Invitation from './Invitation'
 
 export default {
   name: 'CardList',
   components: {
-    Card
+    Card,
+    Invitation
   },
   data () {
     return {
