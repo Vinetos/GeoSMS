@@ -1,7 +1,9 @@
 <template>
   <div id="card-list">
     <Card title="Welcome" description="Welcome to GeoSMS."/>
-    <Card />
+    <Card title="SMS" description="Send an SMS">
+      <vue-tel-input v-model="phone" @onInput="onInput" />
+      </Card>
   </div>
 </template>
 
@@ -12,6 +14,25 @@ export default {
   name: 'CardList',
   components: {
     Card
+  },
+  data () {
+    return {
+      phone: ''
+    }
+  },
+  methods: {
+    /**
+     * @param {string} number
+     * the phone number inputted by user, will be formatted along with country code
+     * // Ex: inputted: (AU) 0432 432 432
+     * // number = '+61432421546'
+     *
+     * @param {Boolean} isValid
+     * @param {string} country
+     */
+    onInput ({ number, isValid, country }) {
+      console.log(number, isValid, country)
+    }
   }
 }
 </script>

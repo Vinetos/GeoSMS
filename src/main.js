@@ -4,6 +4,8 @@ import 'es6-promise/auto'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import 'vue-tel-input/dist/vue-tel-input.css'
+import VueTelInput from 'vue-tel-input'
 
 Vue.config.productionTip = false
 
@@ -15,6 +17,7 @@ Vue.use(VueGoogleMaps, {
   },
   autobindAllEvents: false
 })
+Vue.use(VueTelInput)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
