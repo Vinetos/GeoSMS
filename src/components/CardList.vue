@@ -2,9 +2,10 @@
   <div id="card-list">
     <Card title="Welcome" description="Welcome to GeoSMS."/>
     <Card title="SMS" description="Send an SMS">
-      <vue-tel-input v-model="phone" @onInput="onInput" />
-      <!-- <button type="button">Click Me!</button> -->
+      <vue-tel-input v-model="phone" />
+      <button type="button" v-on:click="sendSms">Click Me!</button>
       </Card>
+    <Card :description="generatedUrl"/>
   </div>
 </template>
 
@@ -18,23 +19,30 @@ export default {
     Card,
     Invitation
   },
+  props: ['fullPath'],
   data () {
     return {
-      phone: ''
+      phone: '',
+      generatedUrl: undefined
+    }
+  },
+  mounted () {
+    this.$options.sockets.update = (data) => {
+      // todo Add marker with the position
+      // console.log(data)
     }
   },
   methods: {
     /**
-     * @param {string} number
-     * the phone number inputted by user, will be formatted along with country code
-     * // Ex: inputted: (AU) 0432 432 432
-     * // number = '+61432421546'
-     *
-     * @param {Boolean} isValid
-     * @param {string} country
+     * We send an sms to the patient and create a room on the socket server
+     * to get back the patient location when we have it
      */
-    onInput ({ number, isValid, country }) {
-      console.log(number, isValid, country)
+    sendSms () {
+      // Ignore this.phone for now
+      const timeStamp = Date.now()
+      this.$socket.emit('register', timeStamp)
+      this.generatedUrl = timeStamp + ''
+      console.log(this.generatedUrl)
     }
   }
 }
