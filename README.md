@@ -23,20 +23,24 @@ Then, the patient will **receive an SMS** with a **one-time link**.
 The patient must **activate an internet connection**, click on the link and **allow the website** to use the **localization** (GPS).  
 The operator will get **a marker** with **the patient location** and its **GPS coordinates** on the map.  
 
-## Build Setup
-
+## Build Setup  
+Default socket.io server : ``localhost:3000``  
+Default dev url : ``localhost:8080``  
 ``` bash
-# install dependencies
-npm install
+# Update submodule (server)
+git submodule update --recursive
 
-# serve with hot reload at localhost:8080
+# install dependencies
+npm install && cd server && npm install && cd ..
+
+# Serve the application with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
+# Start the redis.io server (for communication between patient and operator)
+npm run server
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# Or build for production with minification
+npm run build
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
