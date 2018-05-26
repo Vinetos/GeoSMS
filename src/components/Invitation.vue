@@ -1,5 +1,6 @@
 /*
 In this page, we will get the user position and send it to the database (to update the operator's map)
+* todo Create a page
 */
 <template>
   <div>

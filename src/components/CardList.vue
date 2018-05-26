@@ -3,7 +3,8 @@
     <Card title="Welcome" description="Welcome to GeoSMS."/>
     <Card title="SMS" description="Send an SMS">
       <vue-tel-input v-model="phone" />
-      <button type="button" v-on:click="sendSms">Click Me!</button>
+      <br/>
+      <button type="button" v-on:click="sendSms">Send SMS !</button>
       </Card>
     <Card :description="generatedUrl"/>
   </div>
