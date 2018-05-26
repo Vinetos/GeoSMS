@@ -33,7 +33,11 @@ export default {
       }
     },
     sendLocation () {
-      if (this.lat !== undefined && this.lng !== undefined) { this.$socket.emit('send', this.path.substring(1), [this.lat, this.lng]) }
+      if (this.lat !== undefined && this.lng !== undefined) {
+        this.$socket.emit('send', this.path.substring(1), {
+          lat: this.lat, lng: this.lng
+        })
+      }
     }
   }
 }
