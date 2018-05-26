@@ -12,6 +12,7 @@
 <script>
 import Card from './Card'
 import Invitation from './Invitation'
+import {gmapApi} from 'vue2-google-maps'
 
 export default {
   name: 'CardList',
@@ -26,10 +27,17 @@ export default {
       generatedUrl: undefined
     }
   },
+  computed: {
+    google: gmapApi
+  },
   mounted () {
     this.$options.sockets.update = (data) => {
       // todo Add marker with the position
-      // console.log(data)
+      /* new this.google.maps.Marker({
+        position: data,
+        map: this.googleMap, // Get the google map
+        title: 'Hello World!'
+      }) */
     }
   },
   methods: {
@@ -42,7 +50,7 @@ export default {
       const timeStamp = Date.now()
       this.$socket.emit('register', timeStamp)
       this.generatedUrl = timeStamp + ''
-      console.log(this.generatedUrl)
+      console.log(this.generatedUrl) // Access to url:8080/generatedURL to send your position
     }
   }
 }

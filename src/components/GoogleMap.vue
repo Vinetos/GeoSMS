@@ -1,5 +1,5 @@
 <template>
-  <GmapMap class="google-map" ref="map" :center="{lat:46.52863469527167, lng:2.43896484375}" :zoom="6"
+  <GmapMap class="google-map" ref="map" :center="{lat:mapInfo.lat, lng:mapInfo.lng}" :zoom="6"
            map-type-id="hybrid">
   </GmapMap>
 </template>
