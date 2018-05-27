@@ -33,17 +33,18 @@ export default {
   },
   mounted () {
     this.$options.sockets.update = (data) => {
-      if (this.lastPatientLocationMarker) {
+      if (!this.lastPatientLocationMarker) {
         this.lastPatientLocationMarker.setMap(null)
       }
-      const map = this.$store.state.theGoogleMap;
+      const map = this.$store.state.theGoogleMap
       this.lastPatientLocationMarker = new this.google.maps.Marker({
         position: data,
         map: map,
-        title: 'Last patient\'s location'
+        title: 'Last patient\'s location',
+        animation: this.google.maps.Animation.DROP
       })
-      map.setZoom(17)
-      map.panTo(this.lastPatientLocationMarker.position)
+      map.setCenter(this.lastPatientLocationMarker.position)
+      this.smoothZoom(map, 17)
     }
   },
   methods: {
@@ -58,6 +59,22 @@ export default {
       this.$socket.emit('register', timeStamp)
       this.generatedUrl = window.location.href + timeStamp
       console.log(this.generatedUrl) // Access to url/timeStamp to send your position
+    },
+    /**
+     * Animate the map we we zoom on the marker
+     */
+    smoothZoom (map, zoomLevel) {
+      const step = 1
+      // Calculate the new zoom
+      let zoom = map.getZoom()
+      if (zoom > zoomLevel) {
+        zoom -= step
+      } else if (zoom < zoomLevel) {
+        zoom += step
+      } else { return }
+
+      map.setZoom(zoom)
+      setTimeout(() => { this.smoothZoom(map, zoomLevel) }, 80)
     }
   }
 }
