@@ -1,5 +1,5 @@
 <template>
-  <div v-if="title && description" id="card">
+  <div v-if="title || description" id="card">
     <h1 id="title">{{title}}</h1>
     <span id="description">{{description}}</span>
     <slot></slot>

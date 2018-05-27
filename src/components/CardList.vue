@@ -1,12 +1,21 @@
 <template>
   <div id="card-list">
-    <Card title="Welcome" description="Welcome to GeoSMS."/>
-    <Card title="SMS" description="Send an SMS">
-      <vue-tel-input v-model="phone" />
+    <Card title="GeoSMS"
+          description="Welcome to GeoSMS. It allow you to get the patient GPS coordinates by sending its custom url."/>
+    <Card title="SMS" description="Here you will generate an URL and send it in a SMS.">
       <br/>
-      <button type="button" v-on:click="sendSms">Send SMS !</button>
-      </Card>
-    <Card :description="generatedUrl"/>
+      <br/>
+      <a>1. Enter the phone-number :</a>
+      <vue-tel-input v-model="phone"/>
+      <br/>
+      <a>2. Generate and send the SMS : </a>
+      <button type="button" v-on:click="sendSms">Generate and Send</button>
+      <div v-if="generatedUrl">
+        <br/>
+        <a>Patient's URL :</a>
+        <a target="_blank" :href="generatedUrl">{{generatedUrl}}</a>
+      </div>
+    </Card>
   </div>
 </template>
 
@@ -33,7 +42,7 @@ export default {
   },
   mounted () {
     this.$options.sockets.update = (data) => {
-      if (!this.lastPatientLocationMarker) {
+      if (this.lastPatientLocationMarker) {
         this.lastPatientLocationMarker.setMap(null)
       }
       const map = this.$store.state.theGoogleMap
@@ -49,9 +58,9 @@ export default {
   },
   methods: {
     /**
-     * We send an sms to the patient and create a room on the socket server
-     * to get back the patient location when we have it
-     */
+       * We send an sms to the patient and create a room on the socket server
+       * to get back the patient location when we have it
+       */
     sendSms () {
       // Ignore this.phone for now
       // We use timestamp as uniq id for the patient url
@@ -61,8 +70,8 @@ export default {
       console.log(this.generatedUrl) // Access to url/timeStamp to send your position
     },
     /**
-     * Animate the map we we zoom on the marker
-     */
+       * Animate the map we we zoom on the marker
+       */
     smoothZoom (map, zoomLevel) {
       const step = 1
       // Calculate the new zoom
@@ -71,10 +80,14 @@ export default {
         zoom -= step
       } else if (zoom < zoomLevel) {
         zoom += step
-      } else { return }
+      } else {
+        return
+      }
 
       map.setZoom(zoom)
-      setTimeout(() => { this.smoothZoom(map, zoomLevel) }, 80)
+      setTimeout(() => {
+        this.smoothZoom(map, zoomLevel)
+      }, 80)
     }
   }
 }
@@ -85,6 +98,7 @@ export default {
   #card + #card {
     margin-top: 5px;
   }
+
   #vue-tel-input {
     float: left;
   }
