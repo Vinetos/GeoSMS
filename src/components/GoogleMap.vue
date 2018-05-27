@@ -12,13 +12,11 @@
 </style>
 
 <script>
-import store from '../store/AppStore'
 import {mapGetters} from 'vuex'
 import {gmapApi} from 'vue2-google-maps'
 
 export default {
   name: 'google-map',
-  store: store,
   computed: {
     ...mapGetters(['mapInfo']),
     google: gmapApi
@@ -30,6 +28,7 @@ export default {
         disableDefaultUI: true
       }
       map.setOptions(mapOptions)
+      this.$store.commit('SET_MAP', map)
     })
     // Auto display traffic information
     this.$refs.map.$on('zoom_changed', () => { this.updateTrafficOnMap() })
@@ -38,9 +37,14 @@ export default {
     if (hours >= 21 || hours <= 8) { this.setDarkMode() }
   },
   methods: {
+    updateMap (updateFunction) {
+      this.$refs.map.$mapPromise.then((map) => {
+        updateFunction(map)
+      })
+    },
     setDarkMode: function () {
       // Update style
-      this.$refs.map.$mapPromise.then((map) => {
+      this.updateMap((map) => {
         const mapOptions = {
           styles: darkMode
         }
@@ -50,7 +54,7 @@ export default {
       })
     },
     updateTrafficOnMap: function (force = false) {
-      this.$refs.map.$mapPromise.then((map) => {
+      this.updateMap((map) => {
         const shouldBeEnabled = map.getZoom() >= 10
         if (this.trafficLayer) {
           this.trafficLayer.setMap(null)

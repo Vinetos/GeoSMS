@@ -6,7 +6,8 @@ import router from './router'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vue-tel-input/dist/vue-tel-input.css'
 import VueTelInput from 'vue-tel-input'
-import VueSocketio from 'vue-socket.io';
+import VueSocketio from 'vue-socket.io'
+import store from './store/AppStore'
 
 Vue.config.productionTip = false
 
@@ -23,6 +24,7 @@ Vue.use(VueSocketio, 'http://localhost:3000')
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store: store,
   router,
   render: h => h(require('./App').default)
 })

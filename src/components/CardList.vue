@@ -21,11 +21,11 @@ export default {
     Card,
     Invitation
   },
-  props: ['fullPath'],
   data () {
     return {
       phone: '',
-      generatedUrl: undefined
+      generatedUrl: undefined,
+      lastPatientLocationMarker: undefined
     }
   },
   computed: {
@@ -33,12 +33,17 @@ export default {
   },
   mounted () {
     this.$options.sockets.update = (data) => {
-      // todo Add marker with the position
-      /* new this.google.maps.Marker({
+      if (this.lastPatientLocationMarker) {
+        this.lastPatientLocationMarker.setMap(null)
+      }
+      const map = this.$store.state.theGoogleMap;
+      this.lastPatientLocationMarker = new this.google.maps.Marker({
         position: data,
-        map: this.googleMap, // Get the google map
-        title: 'Hello World!'
-      }) */
+        map: map,
+        title: 'Last patient\'s location'
+      })
+      map.setZoom(17)
+      map.panTo(this.lastPatientLocationMarker.position)
     }
   },
   methods: {
@@ -48,10 +53,11 @@ export default {
      */
     sendSms () {
       // Ignore this.phone for now
+      // We use timestamp as uniq id for the patient url
       const timeStamp = Date.now()
       this.$socket.emit('register', timeStamp)
-      this.generatedUrl = timeStamp + ''
-      console.log(this.generatedUrl) // Access to url:8080/generatedURL to send your position
+      this.generatedUrl = window.location.href + timeStamp
+      console.log(this.generatedUrl) // Access to url/timeStamp to send your position
     }
   }
 }
