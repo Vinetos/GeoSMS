@@ -20,8 +20,9 @@ export default {
     }
   },
   mounted () {
-    // Send the location directly whe the page is loaded
-    this.$nextTick(() => this.updateLocation())
+    // Send the location directly when the page is loaded (every 20s)
+    this.updateLocation()
+    this.$nextTick(() => setInterval(this.updateLocation, 20000))
   },
   methods: {
     updateLocation () {

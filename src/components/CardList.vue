@@ -56,15 +56,19 @@ export default {
         this.lastPatientLocationMarker.setMap(null)
       }
       const map = this.$store.state.theGoogleMap
-      this.lastPatientLocationMarker = new this.google.maps.Marker({
+      // Show a label (and maybe the closest road name ?)
+      const marker = new this.google.maps.Marker({
         position: data,
         map: map,
         title: 'Last patient\'s location',
         label: 'P',
-        animation: this.google.maps.Animation.DROP
+        animation: !this.lastPatientLocationMarker ? this.google.maps.Animation.DROP : undefined
       })
-      map.setCenter(this.lastPatientLocationMarker.position)
-      this.smoothZoom(map, 17)
+      if (!this.lastPatientLocationMarker) {
+        this.smoothZoom(map, 17)
+        map.setCenter(marker.position)
+      }
+      this.lastPatientLocationMarker = marker
     }
   },
   methods: {
