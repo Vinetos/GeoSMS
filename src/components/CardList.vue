@@ -16,6 +16,14 @@
         <a target="_blank" :href="generatedUrl" style="font-size: 14px; text-decoration: underline">{{generatedUrl}}</a>
       </div>
     </Card>
+    <div v-if="location">
+      <Card title="Patient" description="Here you can find pieces of information about the patient : ">
+        <br/>
+        <br/>
+        <p><b>Latitude : </b>{{location.lat}}</p>
+        <p><b>Longitude : </b>{{location.lng}}</p>
+      </Card>
+    </div>
   </div>
 </template>
 
@@ -34,7 +42,8 @@ export default {
     return {
       phone: '',
       generatedUrl: undefined,
-      lastPatientLocationMarker: undefined
+      lastPatientLocationMarker: undefined,
+      location: undefined
     }
   },
   computed: {
@@ -42,6 +51,7 @@ export default {
   },
   mounted () {
     this.$options.sockets.update = (data) => {
+      this.location = data
       if (this.lastPatientLocationMarker) {
         this.lastPatientLocationMarker.setMap(null)
       }
@@ -95,7 +105,7 @@ export default {
 
 <style scoped>
   /* Space between cards */
-  #card + #card {
+  #card {
     margin-top: 5px;
   }
 
