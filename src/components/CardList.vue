@@ -60,6 +60,7 @@ export default {
         position: data,
         map: map,
         title: 'Last patient\'s location',
+        label: 'P',
         animation: this.google.maps.Animation.DROP
       })
       map.setCenter(this.lastPatientLocationMarker.position)
