@@ -13,7 +13,7 @@
       <div v-if="generatedUrl">
         <br/>
         <a>Patient's URL :</a>
-        <a target="_blank" :href="generatedUrl">{{generatedUrl}}</a>
+        <a target="_blank" :href="generatedUrl" style="font-size: 14px; text-decoration: underline">{{generatedUrl}}</a>
       </div>
     </Card>
   </div>
