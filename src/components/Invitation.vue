@@ -46,13 +46,20 @@ export default {
   },
   methods: {
     updateLocation () {
+      const self = this
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.lat = position.coords.latitude
-          this.lng = position.coords.longitude
-          this.sendLocation()
-          this.updateMap()
-        }, undefined, {enableHighAccuracy: true})
+        navigator.permissions.query({name: 'geolocation'}).then((result) => {
+          if (result.state === 'granted' || result.state === 'prompt') {
+            navigator.geolocation.getCurrentPosition((position) => {
+              self.lat = position.coords.latitude
+              self.lng = position.coords.longitude
+              self.sendLocation()
+              self.updateMap()
+            }, undefined, {enableHighAccuracy: true})
+          } else if (result.state === 'denied') {
+            alert('You have to enable the geolocation otherwise we can\'t get you\'re position')
+          }
+        })
       }
     },
     sendLocation () {
