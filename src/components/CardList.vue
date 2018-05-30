@@ -4,16 +4,21 @@
           description="Welcome to GeoSMS. It allow you to get the patient GPS coordinates by sending its custom url."/>
     <Card title="SMS" description="Here you will generate an URL and send it in a SMS.">
       <br/>
-      <br/>
-      <a>1. Enter the phone-number :</a>
-      <vue-tel-input v-model="phone"/>
-      <br/>
-      <a>2. Generate and send the SMS : </a>
-      <button type="button" v-on:click="sendSms">Generate and Send</button>
+      <div v-if="!generatedUrl">
+        <br/>
+        <a>1. Enter the phone-number :</a>
+        <vue-tel-input v-model="phone"/>
+        <br/>
+        <a>2. Generate and send the SMS : </a>
+        <button type="button" v-on:click="sendSms">Generate and Send</button>
+      </div>
       <div v-if="generatedUrl">
         <br/>
         <a>Patient's URL :</a>
         <a target="_blank" :href="generatedUrl" style="font-size: 14px; text-decoration: underline">{{generatedUrl}}</a>
+        <br/>
+        <br/>
+        <p style="font-size: 12px; font-style: italic">We don't have sent an SMS because we don't have a provider. Just click on the link. It's the same as the one that would have been sent. </p>
       </div>
     </Card>
     <div v-if="location">
@@ -77,8 +82,9 @@ export default {
        * to get back the patient location when we have it
        */
     sendSms () {
-      // Ignore this.phone for now
-      // We use timestamp as uniq id for the patient url
+      // Here you can add your function to send an SMS.
+      // For now, We will just create a link
+      // We use timestamp as unique id for the patient url
       const timeStamp = Date.now()
       this.$socket.emit('register', timeStamp)
       this.generatedUrl = window.location.href + timeStamp
