@@ -24,14 +24,10 @@ The patient must **activate an internet connection**, click on the link and **al
 The operator will get **a marker** with **the patient location** and its **GPS coordinates** on the map.  
 
 ## Build Setup  
-Default socket.io server : ``localhost:3000``  
 Default dev url : ``localhost:8080``  
 ``` bash
-# Update submodule (server)
-git submodule update --recursive
-
 # install dependencies
-npm install && cd server && npm install && cd ..
+npm install
 
 # Serve the application with hot reload at localhost:8080
 npm run dev
